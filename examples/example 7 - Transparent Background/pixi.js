@@ -4,7 +4,7 @@
  * Copyright (c) 2012, Mat Groves
  * http://goodboydigital.com/
  *
- * Compiled: 2013-04-09
+ * Compiled: 2013-04-08
  *
  * Pixi.JS is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license.php
@@ -1797,13 +1797,6 @@ PIXI.WebGLRenderer.prototype.checkVisibility = function(displayObject, globalVis
 PIXI.WebGLRenderer.prototype.render = function(stage)
 {
 	if(this.contextLost)return;
-	
-	// if rendering a new stage clear the batchs..
-	if(this.__stage !== stage)
-	{
-		if(this.__stage)this.checkVisibility(this.__stage, false)
-		this.__stage = stage;
-	}
 	
 	// update children if need be
 	// best to remove first!
@@ -3820,19 +3813,16 @@ PIXI.SpriteSheetLoader.prototype.onLoaded = function()
 			for (var i in frameData) 
 			{
 				var rect = frameData[i].frame;
-				if (rect)
+				PIXI.TextureCache[i] = new PIXI.Texture(this.texture, {x:rect.x, y:rect.y, width:rect.w, height:rect.h});
+				
+				if(frameData[i].trimmed)
 				{
-					PIXI.TextureCache[i] = new PIXI.Texture(this.texture, {x:rect.x, y:rect.y, width:rect.w, height:rect.h});
-					
-					if(frameData[i].trimmed)
-					{
-						//var realSize = frameData[i].spriteSourceSize;
-						PIXI.TextureCache[i].realSize = frameData[i].spriteSourceSize;
-						PIXI.TextureCache[i].trim.x = 0// (realSize.x / rect.w)
-						// calculate the offset!
-					}
-	//				this.frames[i] = ;
+					//var realSize = frameData[i].spriteSourceSize;
+					PIXI.TextureCache[i].realSize = frameData[i].spriteSourceSize;
+					PIXI.TextureCache[i].trim.x = 0// (realSize.x / rect.w)
+					// calculate the offset!
 				}
+//				this.frames[i] = ;
    			}
 			
 			if(this.texture.hasLoaded)
