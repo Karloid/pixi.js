@@ -21,6 +21,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/pixi/extras/TilingSprite.js": {
+            "name": "src/pixi/extras/TilingSprite.js",
+            "modules": {},
+            "classes": {
+                "TilingSprite": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src/pixi/loaders/AssetLoader.js": {
             "name": "src/pixi/loaders/AssetLoader.js",
             "modules": {},
@@ -193,6 +202,15 @@
             },
             "fors": {},
             "namespaces": {}
+        },
+        "src/pixi/Text.js": {
+            "name": "src/pixi/Text.js",
+            "modules": {},
+            "classes": {
+                "Text": 1
+            },
+            "fors": {},
+            "namespaces": {}
         }
     },
     "modules": {
@@ -200,6 +218,7 @@
             "name": "PIXI",
             "submodules": {},
             "classes": {
+                "TilingSprite": 1,
                 "AssetLoader": 1,
                 "SpriteSheetLoader": 1,
                 "CanvasRenderer": 1,
@@ -215,16 +234,49 @@
                 "Point": 1,
                 "Rectangle": 1,
                 "Sprite": 1,
-                "Stage": 1
+                "Stage": 1,
+                "Text": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "src/pixi/Stage.js",
+            "file": "src/pixi/Text.js",
             "line": 5
         }
     },
     "classes": {
+        "TilingSprite": {
+            "name": "TilingSprite",
+            "shortname": "TilingSprite",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "PIXI",
+            "file": "src/pixi/extras/TilingSprite.js",
+            "line": 5,
+            "description": "A tiling sprite is a fast way of rendering a tiling image",
+            "extends": "DisplayObjectContainer",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "texture",
+                    "description": "the texture of the tiling sprite",
+                    "type": "Texture"
+                },
+                {
+                    "name": "width",
+                    "description": "the width of the tiling sprite",
+                    "type": "Number"
+                },
+                {
+                    "name": "height",
+                    "description": "the height of the tiling sprite",
+                    "type": "Number"
+                }
+            ]
+        },
         "AssetLoader": {
             "name": "AssetLoader",
             "shortname": "AssetLoader",
@@ -376,7 +428,7 @@
             "extension_for": [],
             "module": "PIXI",
             "file": "src/pixi/textures/BaseTexture.js",
-            "line": 8,
+            "line": 9,
             "description": "A texture stores the information that represents an image. All textures have a base texture",
             "extends": "EventTarget",
             "is_constructor": 1,
@@ -476,7 +528,7 @@
             "extension_for": [],
             "module": "PIXI",
             "file": "src/pixi/InteractionManager.js",
-            "line": 483,
+            "line": 506,
             "is_constructor": 1
         },
         "MovieClip": {
@@ -615,6 +667,49 @@
                     "type": "Boolean"
                 }
             ]
+        },
+        "Text": {
+            "name": "Text",
+            "shortname": "Text",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "PIXI",
+            "namespace": "",
+            "file": "src/pixi/Text.js",
+            "line": 5,
+            "description": "A Text Object will create a line of text",
+            "extends": "Sprite",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "text",
+                    "description": "The copy that you would like the text to display",
+                    "type": "String"
+                },
+                {
+                    "name": "fontStyle",
+                    "description": "the style and size of the font eg \"bold 20px Arial\"",
+                    "type": "String"
+                },
+                {
+                    "name": "fillStyle",
+                    "description": "a canvas fillstyle that will be used on the text eg \"red\", \"#00FF00\" can also be null",
+                    "type": "Object"
+                },
+                {
+                    "name": "strokeStyle",
+                    "description": "a canvas fillstyle that will be used on the text stroke eg \"blue\", \"#FCFF00\" can also be null",
+                    "type": "String"
+                },
+                {
+                    "name": "strokeThickness",
+                    "description": "A number that represents the thicknes of the stroke. default is 0 (no stroke)",
+                    "type": "Number"
+                }
+            ]
         }
     },
     "classitems": [
@@ -622,13 +717,37 @@
             "file": "src/pixi/extras/Rope.js",
             "line": 1,
             "author": "Mat Groves http://matgroves.com/",
-            "class": "AssetLoader"
+            "class": "TilingSprite"
         },
         {
             "file": "src/pixi/extras/Strip.js",
             "line": 1,
             "author": "Mat Groves http://matgroves.com/",
-            "class": "AssetLoader"
+            "class": "TilingSprite"
+        },
+        {
+            "file": "src/pixi/extras/TilingSprite.js",
+            "line": 1,
+            "author": "Mat Groves http://matgroves.com/",
+            "class": "TilingSprite"
+        },
+        {
+            "file": "src/pixi/extras/TilingSprite.js",
+            "line": 23,
+            "description": "The scaling of the image that is being tiled",
+            "itemtype": "property",
+            "name": "tileScale",
+            "type": "Point",
+            "class": "TilingSprite"
+        },
+        {
+            "file": "src/pixi/extras/TilingSprite.js",
+            "line": 29,
+            "description": "The offset position of the image that is being tiled",
+            "itemtype": "property",
+            "name": "tileScale",
+            "type": "Point",
+            "class": "TilingSprite"
         },
         {
             "file": "src/pixi/loaders/AssetLoader.js",
@@ -740,7 +859,7 @@
         },
         {
             "file": "src/pixi/renderers/CanvasRenderer.js",
-            "line": 105,
+            "line": 112,
             "description": "resizes the canvas view to the specified width and height",
             "params": [
                 {
@@ -756,21 +875,28 @@
         },
         {
             "file": "src/pixi/renderers/CanvasRenderer.js",
-            "line": 119,
+            "line": 126,
             "access": "private",
             "tagname": "",
             "class": "CanvasRenderer"
         },
         {
             "file": "src/pixi/renderers/CanvasRenderer.js",
-            "line": 189,
+            "line": 203,
             "access": "private",
             "tagname": "",
             "class": "CanvasRenderer"
         },
         {
             "file": "src/pixi/renderers/CanvasRenderer.js",
-            "line": 224,
+            "line": 238,
+            "access": "private",
+            "tagname": "",
+            "class": "CanvasRenderer"
+        },
+        {
+            "file": "src/pixi/renderers/CanvasRenderer.js",
+            "line": 267,
             "access": "private",
             "tagname": "",
             "class": "CanvasRenderer"
@@ -951,21 +1077,35 @@
         },
         {
             "file": "src/pixi/renderers/WebGLRenderer.js",
-            "line": 71,
+            "line": 73,
             "access": "private",
             "tagname": "",
             "class": "WebGLRenderer"
         },
         {
             "file": "src/pixi/renderers/WebGLRenderer.js",
-            "line": 110,
+            "line": 88,
             "access": "private",
             "tagname": "",
             "class": "WebGLRenderer"
         },
         {
             "file": "src/pixi/renderers/WebGLRenderer.js",
-            "line": 160,
+            "line": 98,
+            "access": "private",
+            "tagname": "",
+            "class": "WebGLRenderer"
+        },
+        {
+            "file": "src/pixi/renderers/WebGLRenderer.js",
+            "line": 137,
+            "access": "private",
+            "tagname": "",
+            "class": "WebGLRenderer"
+        },
+        {
+            "file": "src/pixi/renderers/WebGLRenderer.js",
+            "line": 187,
             "description": "Renders the stage to its webGL view",
             "itemtype": "method",
             "name": "render",
@@ -980,28 +1120,28 @@
         },
         {
             "file": "src/pixi/renderers/WebGLRenderer.js",
-            "line": 241,
+            "line": 284,
             "access": "private",
             "tagname": "",
             "class": "WebGLRenderer"
         },
         {
             "file": "src/pixi/renderers/WebGLRenderer.js",
-            "line": 270,
+            "line": 337,
             "access": "private",
             "tagname": "",
             "class": "WebGLRenderer"
         },
         {
             "file": "src/pixi/renderers/WebGLRenderer.js",
-            "line": 466,
+            "line": 540,
             "access": "private",
             "tagname": "",
             "class": "WebGLRenderer"
         },
         {
             "file": "src/pixi/renderers/WebGLRenderer.js",
-            "line": 544,
+            "line": 617,
             "description": "resizes the webGL view to the specified width and height",
             "itemtype": "method",
             "name": "resize",
@@ -1021,28 +1161,42 @@
         },
         {
             "file": "src/pixi/renderers/WebGLRenderer.js",
-            "line": 568,
+            "line": 642,
             "access": "private",
             "tagname": "",
             "class": "WebGLRenderer"
         },
         {
             "file": "src/pixi/renderers/WebGLRenderer.js",
-            "line": 596,
+            "line": 722,
             "access": "private",
             "tagname": "",
             "class": "WebGLRenderer"
         },
         {
             "file": "src/pixi/renderers/WebGLRenderer.js",
-            "line": 673,
+            "line": 762,
             "access": "private",
             "tagname": "",
             "class": "WebGLRenderer"
         },
         {
             "file": "src/pixi/renderers/WebGLRenderer.js",
-            "line": 682,
+            "line": 790,
+            "access": "private",
+            "tagname": "",
+            "class": "WebGLRenderer"
+        },
+        {
+            "file": "src/pixi/renderers/WebGLRenderer.js",
+            "line": 867,
+            "access": "private",
+            "tagname": "",
+            "class": "WebGLRenderer"
+        },
+        {
+            "file": "src/pixi/renderers/WebGLRenderer.js",
+            "line": 876,
             "access": "private",
             "tagname": "",
             "class": "WebGLRenderer"
@@ -1061,7 +1215,7 @@
         },
         {
             "file": "src/pixi/textures/BaseTexture.js",
-            "line": 26,
+            "line": 27,
             "description": "[read only] The width of the base texture set when the image has loaded",
             "itemtype": "property",
             "name": "width",
@@ -1070,7 +1224,7 @@
         },
         {
             "file": "src/pixi/textures/BaseTexture.js",
-            "line": 32,
+            "line": 33,
             "description": "[read only] The height of the base texture set when the image has loaded",
             "itemtype": "property",
             "name": "height",
@@ -1079,11 +1233,30 @@
         },
         {
             "file": "src/pixi/textures/BaseTexture.js",
-            "line": 39,
+            "line": 40,
             "description": "The source that is loaded to create the texture",
             "itemtype": "property",
             "name": "source",
             "type": "Image",
+            "class": "BaseTexture"
+        },
+        {
+            "file": "src/pixi/textures/BaseTexture.js",
+            "line": 102,
+            "description": "Helper function that returns a base texture based on an image url\n If the image is not in the base texture cache it will be  created and loaded",
+            "static": 1,
+            "itemtype": "method",
+            "name": "fromImage",
+            "params": [
+                {
+                    "name": "imageUrl",
+                    "description": "The image url of the texture",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "BaseTexture"
+            },
             "class": "BaseTexture"
         },
         {
@@ -1094,7 +1267,7 @@
         },
         {
             "file": "src/pixi/textures/Texture.js",
-            "line": 28,
+            "line": 31,
             "description": "The base texture of this texture",
             "itemtype": "property",
             "name": "baseTexture",
@@ -1103,7 +1276,7 @@
         },
         {
             "file": "src/pixi/textures/Texture.js",
-            "line": 37,
+            "line": 40,
             "description": "The frame specifies the region of the base texture that this texture uses",
             "itemtype": "property",
             "name": "frame",
@@ -1112,7 +1285,7 @@
         },
         {
             "file": "src/pixi/textures/Texture.js",
-            "line": 75,
+            "line": 83,
             "description": "Specifies the rectangle region of the baseTexture",
             "itemtype": "method",
             "name": "setFrame",
@@ -1127,7 +1300,7 @@
         },
         {
             "file": "src/pixi/textures/Texture.js",
-            "line": 93,
+            "line": 105,
             "description": "Helper function that returns a texture based on an image url\n If the image is not in the texture cache it will be  created and loaded",
             "static": 1,
             "itemtype": "method",
@@ -1146,7 +1319,7 @@
         },
         {
             "file": "src/pixi/textures/Texture.js",
-            "line": 131,
+            "line": 127,
             "description": "Helper function that returns a texture based on a frame id\n If the frame id is not in the texture cache an error will be thrown",
             "itemtype": "method",
             "name": "fromFrame",
@@ -1164,7 +1337,7 @@
         },
         {
             "file": "src/pixi/textures/Texture.js",
-            "line": 146,
+            "line": 142,
             "description": "Helper function that returns a texture based on a canvas element\n If the canvas is not in the texture cache it will be  created and loaded",
             "static": 1,
             "itemtype": "method",
@@ -1183,7 +1356,7 @@
         },
         {
             "file": "src/pixi/textures/Texture.js",
-            "line": 162,
+            "line": 158,
             "description": "Adds a texture to the textureCache.",
             "itemtype": "method",
             "name": "addTextureToCache",
@@ -1203,7 +1376,7 @@
         },
         {
             "file": "src/pixi/textures/Texture.js",
-            "line": 174,
+            "line": 170,
             "description": "Remove a texture from the textureCache.",
             "itemtype": "method",
             "name": "removeTextureFromCache",
@@ -1579,6 +1752,41 @@
         {
             "file": "src/pixi/DisplayObjectContainer.js",
             "line": 97,
+            "description": "Swaps the depth of 2 displayObjects",
+            "itemtype": "method",
+            "name": "swapChildren",
+            "params": [
+                {
+                    "name": "DisplayObject",
+                    "description": "",
+                    "type": "DisplayObject"
+                },
+                {
+                    "name": "DisplayObject2",
+                    "description": "",
+                    "type": "DisplayObject"
+                }
+            ],
+            "class": "DisplayObjectContainer"
+        },
+        {
+            "file": "src/pixi/DisplayObjectContainer.js",
+            "line": 137,
+            "description": "Returns the Child at the specified index",
+            "itemtype": "method",
+            "name": "getChildAt",
+            "params": [
+                {
+                    "name": "index",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "class": "DisplayObjectContainer"
+        },
+        {
+            "file": "src/pixi/DisplayObjectContainer.js",
+            "line": 155,
             "description": "Removes a child from the container.",
             "itemtype": "method",
             "name": "removeChild",
@@ -1593,7 +1801,7 @@
         },
         {
             "file": "src/pixi/DisplayObjectContainer.js",
-            "line": 126,
+            "line": 184,
             "access": "private",
             "tagname": "",
             "class": "DisplayObjectContainer"
@@ -1633,7 +1841,7 @@
         },
         {
             "file": "src/pixi/InteractionManager.js",
-            "line": 489,
+            "line": 512,
             "description": "This point stores the global coords of where the touch/mouse event happened",
             "itemtype": "property",
             "name": "global",
@@ -1642,7 +1850,7 @@
         },
         {
             "file": "src/pixi/InteractionManager.js",
-            "line": 499,
+            "line": 522,
             "description": "The target Sprite that was interacted with",
             "itemtype": "property",
             "name": "target",
@@ -1651,7 +1859,7 @@
         },
         {
             "file": "src/pixi/InteractionManager.js",
-            "line": 507,
+            "line": 530,
             "description": "This will return the local coords of the specified displayObject for this InteractionData",
             "itemtype": "method",
             "name": "getLocalPosition",
@@ -1704,6 +1912,24 @@
         {
             "file": "src/pixi/MovieClip.js",
             "line": 37,
+            "description": "Whether or not the movie clip repeats after playing.",
+            "itemtype": "property",
+            "name": "loop",
+            "type": "Boolean",
+            "class": "MovieClip"
+        },
+        {
+            "file": "src/pixi/MovieClip.js",
+            "line": 44,
+            "description": "Function to call when a MovieClip finishes playing",
+            "itemtype": "property",
+            "name": "onComplete",
+            "type": "Function",
+            "class": "MovieClip"
+        },
+        {
+            "file": "src/pixi/MovieClip.js",
+            "line": 51,
             "description": "[read only] indicates if the MovieClip is currently playing",
             "itemtype": "property",
             "name": "playing",
@@ -1712,7 +1938,7 @@
         },
         {
             "file": "src/pixi/MovieClip.js",
-            "line": 49,
+            "line": 63,
             "description": "Stops the MovieClip",
             "itemtype": "method",
             "name": "stop",
@@ -1720,7 +1946,7 @@
         },
         {
             "file": "src/pixi/MovieClip.js",
-            "line": 58,
+            "line": 72,
             "description": "Plays the MovieClip",
             "itemtype": "method",
             "name": "play",
@@ -1728,7 +1954,7 @@
         },
         {
             "file": "src/pixi/MovieClip.js",
-            "line": 67,
+            "line": 81,
             "description": "Stops the MovieClip and goes to a specific frame",
             "itemtype": "method",
             "name": "gotoAndStop",
@@ -1743,7 +1969,7 @@
         },
         {
             "file": "src/pixi/MovieClip.js",
-            "line": 80,
+            "line": 94,
             "description": "Goes to a specific frame and begins playing the MovieClip",
             "itemtype": "method",
             "name": "gotoAndPlay",
@@ -1917,7 +2143,7 @@
         },
         {
             "file": "src/pixi/Sprite.js",
-            "line": 83,
+            "line": 103,
             "itemtype": "method",
             "name": "setTexture",
             "params": [
@@ -1932,7 +2158,7 @@
         },
         {
             "file": "src/pixi/Sprite.js",
-            "line": 101,
+            "line": 119,
             "access": "private",
             "tagname": "",
             "class": "Sprite",
@@ -1940,7 +2166,7 @@
         },
         {
             "file": "src/pixi/Sprite.js",
-            "line": 113,
+            "line": 135,
             "description": "Helper function that creates a sprite that will contain a texture from the TextureCache based on the frameId\n The frame ids are created when a Texture packer file has been loaded",
             "itemtype": "method",
             "name": "fromFrame",
@@ -1961,7 +2187,7 @@
         },
         {
             "file": "src/pixi/Sprite.js",
-            "line": 129,
+            "line": 151,
             "description": "Helper function that creates a sprite that will contain a texture based on an image url\n If the image is not in the texture cache it will be loaded",
             "itemtype": "method",
             "name": "fromImage",
@@ -2009,6 +2235,81 @@
             ],
             "class": "Stage",
             "module": "PIXI"
+        },
+        {
+            "file": "src/pixi/Stage.js",
+            "line": 71,
+            "description": "This will return the point containing global coords of the mouse.",
+            "itemtype": "method",
+            "name": "getMousePosition",
+            "return": {
+                "description": "The point containing the coords of the global InteractionData position.",
+                "type": "Point"
+            },
+            "class": "Stage",
+            "module": "PIXI"
+        },
+        {
+            "file": "src/pixi/Text.js",
+            "line": 1,
+            "author": "Mat Groves http://matgroves.com/ @Doormat23",
+            "class": "Text",
+            "module": "PIXI"
+        },
+        {
+            "file": "src/pixi/Text.js",
+            "line": 36,
+            "description": "Set the copy for the text object",
+            "methos": "setText",
+            "params": [
+                {
+                    "name": "text",
+                    "description": "The copy that you would like the text to display",
+                    "type": "String"
+                }
+            ],
+            "class": "Text",
+            "module": "PIXI"
+        },
+        {
+            "file": "src/pixi/Text.js",
+            "line": 47,
+            "description": "Set the style of the text",
+            "itemtype": "method",
+            "name": "setStyle",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "fontStyle",
+                    "description": "the style and size of the font eg \"bold 20px Arial\"",
+                    "type": "String"
+                },
+                {
+                    "name": "fillStyle",
+                    "description": "a canvas fillstyle that will be used on the text eg \"red\", \"#00FF00\" can also be null",
+                    "type": "Object"
+                },
+                {
+                    "name": "strokeStyle",
+                    "description": "a canvas fillstyle that will be used on the text stroke eg \"blue\", \"#FCFF00\" can also be null",
+                    "type": "String"
+                },
+                {
+                    "name": "strokeThickness",
+                    "description": "A number that represents the thicknes of the stroke. default is 0 (no stroke)",
+                    "type": "Number"
+                }
+            ],
+            "class": "Text",
+            "module": "PIXI"
+        },
+        {
+            "file": "src/pixi/Text.js",
+            "line": 66,
+            "access": "private",
+            "tagname": "",
+            "class": "Text",
+            "module": "PIXI"
         }
     ],
     "warnings": [
@@ -2021,12 +2322,20 @@
             "line": " src/pixi/Stage.js:37"
         },
         {
+            "message": "unknown tag: methos",
+            "line": " src/pixi/Text.js:36"
+        },
+        {
             "message": "Missing item type",
             "line": " src/pixi/extras/Rope.js:1"
         },
         {
             "message": "Missing item type",
             "line": " src/pixi/extras/Strip.js:1"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/pixi/extras/TilingSprite.js:1"
         },
         {
             "message": "Missing item type",
@@ -2050,19 +2359,23 @@
         },
         {
             "message": "Missing item type\nresizes the canvas view to the specified width and height",
-            "line": " src/pixi/renderers/CanvasRenderer.js:105"
+            "line": " src/pixi/renderers/CanvasRenderer.js:112"
         },
         {
             "message": "Missing item type",
-            "line": " src/pixi/renderers/CanvasRenderer.js:119"
+            "line": " src/pixi/renderers/CanvasRenderer.js:126"
         },
         {
             "message": "Missing item type",
-            "line": " src/pixi/renderers/CanvasRenderer.js:189"
+            "line": " src/pixi/renderers/CanvasRenderer.js:203"
         },
         {
             "message": "Missing item type",
-            "line": " src/pixi/renderers/CanvasRenderer.js:224"
+            "line": " src/pixi/renderers/CanvasRenderer.js:238"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/pixi/renderers/CanvasRenderer.js:267"
         },
         {
             "message": "Missing item type",
@@ -2094,39 +2407,55 @@
         },
         {
             "message": "Missing item type",
-            "line": " src/pixi/renderers/WebGLRenderer.js:71"
+            "line": " src/pixi/renderers/WebGLRenderer.js:73"
         },
         {
             "message": "Missing item type",
-            "line": " src/pixi/renderers/WebGLRenderer.js:110"
+            "line": " src/pixi/renderers/WebGLRenderer.js:88"
         },
         {
             "message": "Missing item type",
-            "line": " src/pixi/renderers/WebGLRenderer.js:241"
+            "line": " src/pixi/renderers/WebGLRenderer.js:98"
         },
         {
             "message": "Missing item type",
-            "line": " src/pixi/renderers/WebGLRenderer.js:270"
+            "line": " src/pixi/renderers/WebGLRenderer.js:137"
         },
         {
             "message": "Missing item type",
-            "line": " src/pixi/renderers/WebGLRenderer.js:466"
+            "line": " src/pixi/renderers/WebGLRenderer.js:284"
         },
         {
             "message": "Missing item type",
-            "line": " src/pixi/renderers/WebGLRenderer.js:568"
+            "line": " src/pixi/renderers/WebGLRenderer.js:337"
         },
         {
             "message": "Missing item type",
-            "line": " src/pixi/renderers/WebGLRenderer.js:596"
+            "line": " src/pixi/renderers/WebGLRenderer.js:540"
         },
         {
             "message": "Missing item type",
-            "line": " src/pixi/renderers/WebGLRenderer.js:673"
+            "line": " src/pixi/renderers/WebGLRenderer.js:642"
         },
         {
             "message": "Missing item type",
-            "line": " src/pixi/renderers/WebGLRenderer.js:682"
+            "line": " src/pixi/renderers/WebGLRenderer.js:722"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/pixi/renderers/WebGLRenderer.js:762"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/pixi/renderers/WebGLRenderer.js:790"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/pixi/renderers/WebGLRenderer.js:867"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/pixi/renderers/WebGLRenderer.js:876"
         },
         {
             "message": "Missing item type",
@@ -2170,7 +2499,7 @@
         },
         {
             "message": "Missing item type",
-            "line": " src/pixi/DisplayObjectContainer.js:126"
+            "line": " src/pixi/DisplayObjectContainer.js:184"
         },
         {
             "message": "Missing item type",
@@ -2198,11 +2527,23 @@
         },
         {
             "message": "Missing item type",
-            "line": " src/pixi/Sprite.js:101"
+            "line": " src/pixi/Sprite.js:119"
         },
         {
             "message": "Missing item type",
             "line": " src/pixi/Stage.js:1"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/pixi/Text.js:1"
+        },
+        {
+            "message": "Missing item type\nSet the copy for the text object",
+            "line": " src/pixi/Text.js:36"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/pixi/Text.js:66"
         }
     ]
 }

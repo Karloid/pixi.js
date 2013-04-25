@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src&#x2F;pixi&#x2F;loaders&#x2F;AssetLoader.js - Pixi.JS</title>
+    <title>src&#x2F;pixi&#x2F;extras&#x2F;TilingSprite.js - Pixi.JS</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -118,156 +118,67 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src&#x2F;pixi&#x2F;loaders&#x2F;AssetLoader.js</h1>
+                        <h1 class="file-heading">File: src&#x2F;pixi&#x2F;extras&#x2F;TilingSprite.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 &#x2F;**
- * @author Mat Groves http:&#x2F;&#x2F;matgroves.com&#x2F; @Doormat23
+ * @author Mat Groves http:&#x2F;&#x2F;matgroves.com&#x2F;
  *&#x2F;
 
 &#x2F;**
- * A Class that loads a bunch of images &#x2F; sprite sheet files. Once the assets have been loaded they are added to the PIXI Texture cache and can be accessed easily through PIXI.Texture.fromFrame(), PIXI.Texture.fromImage() and PIXI.Sprite.fromImage(), PIXI.Sprite.fromFromeId()
- * When all items have been loaded this class will dispatch a &#x27;loaded&#x27; event
- * As each individual item is loaded this class will dispatch a &#x27;progress&#x27; event
- * @class AssetLoader
+ * A tiling sprite is a fast way of rendering a tiling image
+ * @class TilingSprite
+ * @extends DisplayObjectContainer
  * @constructor
- * @extends EventTarget
- * @param assetURLs {Array} an array of image&#x2F;sprite sheet urls that you would like loaded supported. Supported image formats include &quot;jpeg&quot;, &quot;jpg&quot;, &quot;png&quot;, &quot;gif&quot;. Supported sprite sheet data formats only include &quot;JSON&quot; at this time
+ * @param texture {Texture} the texture of the tiling sprite
+ * @param width {Number}  the width of the tiling sprite
+ * @param height {Number} the height of the tiling sprite
  *&#x2F;
-PIXI.AssetLoader = function(assetURLs)
+PIXI.TilingSprite = function(texture, width, height)
 {
-	PIXI.EventTarget.call( this );
+	PIXI.DisplayObjectContainer.call( this );
+	
+	this.texture = texture;
+	this.width = width;
+	this.height = height;
+	this.renderable = true;
 	
 	&#x2F;**
-	 * The array of asset URLs that are going to be loaded
-	 * @property assetURLs
-	 * @type Array
-	 *&#x2F;
-	this.assetURLs = assetURLs;
+	 * The scaling of the image that is being tiled
+	 * @property tileScale
+	 * @type Point
+	 *&#x2F;	
+	this.tileScale = new PIXI.Point(2,1);
+	&#x2F;**
+	 * The offset position of the image that is being tiled
+	 * @property tileScale
+	 * @type Point
+	 *&#x2F;	
+	this.tilePosition = new PIXI.Point(0,0);
 	
-	this.assets = [];
-
-	this.crossorigin = false;
+	this.blendMode = PIXI.blendModes.NORMAL
 }
-
-&#x2F;**
-Fired when an item has loaded
-@event onProgress
-**&#x2F;
-
-&#x2F;**
-Fired when all the assets have loaded
-@event onComplete 
-**&#x2F;
 
 &#x2F;&#x2F; constructor
-PIXI.AssetLoader.constructor = PIXI.AssetLoader;
+PIXI.TilingSprite.constructor = PIXI.TilingSprite;
+PIXI.TilingSprite.prototype = Object.create( PIXI.DisplayObjectContainer.prototype );
 
-&#x2F;**
- * This will begin loading the assets sequentially
- *&#x2F;
-PIXI.AssetLoader.prototype.load = function()
+PIXI.TilingSprite.prototype.setTexture = function(texture)
 {
-	this.loadCount = this.assetURLs.length;
-	var imageTypes = [&quot;jpeg&quot;, &quot;jpg&quot;, &quot;png&quot;, &quot;gif&quot;];
+	&#x2F;&#x2F;TODO SET THE TEXTURES
+	&#x2F;&#x2F;TODO VISIBILITY
 	
-	var spriteSheetTypes = [&quot;json&quot;];
-	
-	for (var i=0; i &lt; this.assetURLs.length; i++) 
-	{
-		var filename = this.assetURLs[i];
-		var fileType = filename.split(&#x27;.&#x27;).pop().toLowerCase();
-		&#x2F;&#x2F; what are we loading?
-		var type = null;
-		
-		for (var j=0; j &lt; imageTypes.length; j++) 
-		{
-			if(fileType == imageTypes[j])
-			{
-				type = &quot;img&quot;;
-				break;
-			}
-		}
-		
-		if(type != &quot;img&quot;)
-		{
-			for (var j=0; j &lt; spriteSheetTypes.length; j++) 
-			{
-				if(fileType == spriteSheetTypes[j])
-				{
-					type = &quot;atlas&quot;;
-					break;
-				}
-			}
-		}
-		
-		if(type == &quot;img&quot;)
-		{
-			
-			var texture = PIXI.Texture.fromImage(filename, this.crossorigin);
-			if(!texture.baseTexture.hasLoaded)
-			{
-				
-				var scope = this;
-				texture.baseTexture.addEventListener( &#x27;loaded&#x27;, function ( event ) 
-				{
-					scope.onAssetLoaded();
-				});
-	
-				this.assets.push(texture);
-			}
-			else
-			{
-				
-				&#x2F;&#x2F; already loaded!
-				this.loadCount--;
-				&#x2F;&#x2F; if this hits zero here.. then everything was cached!
-				if(this.loadCount == 0)
-				{
-					this.dispatchEvent( { type: &#x27;onComplete&#x27;, content: this } );
-					if(this.onComplete)this.onComplete();
-				}
-			}
-			
-		}
-		else if(type == &quot;atlas&quot;)
-		{
-			var spriteSheetLoader = new PIXI.SpriteSheetLoader(filename);
-			spriteSheetLoader.crossorigin = this.crossorigin;
-			this.assets.push(spriteSheetLoader);
-			
-			var scope = this;
-			spriteSheetLoader.addEventListener( &#x27;loaded&#x27;, function ( event ) 
-			{
-				scope.onAssetLoaded();
-			});
-			
-			spriteSheetLoader.load();
-		}
-		else
-		{
-			&#x2F;&#x2F; dont know what the file is! :&#x2F;
-			&#x2F;&#x2F;this.loadCount--;
-			throw new Error(filename + &quot; is an unsupported file type &quot; + this);
-		}
-		
-		&#x2F;&#x2F;this.assets[i].load();
-	};
+	&#x2F;&#x2F; stop current texture 
+	this.texture = texture;
+	this.updateFrame = true;
 }
 
-PIXI.AssetLoader.prototype.onAssetLoaded = function()
+PIXI.TilingSprite.prototype.onTextureUpdate = function(event)
 {
-	this.loadCount--;
-	this.dispatchEvent( { type: &#x27;onProgress&#x27;, content: this } );
-	if(this.onProgress)this.onProgress();
-	
-	if(this.loadCount == 0)
-	{
-		this.dispatchEvent( { type: &#x27;onComplete&#x27;, content: this } );
-		if(this.onComplete)this.onComplete();
-	}
+	this.updateFrame = true;
 }
+&#x2F;&#x2F; some helper functions..
 
 
     </pre>
